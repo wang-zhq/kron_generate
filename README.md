@@ -2,7 +2,7 @@
 对Graph500的kron图生成器部分进行了复写，可以生成任意点数的32位二进制文件
 
 本程序是根据graph500的octave程序简化后改编而来，源程序是：
-
+`
 function ijw = kronecker_generator (SCALE, edgefactor)
 %% Generate an edgelist according to the Graph500 parameters.  In this
 %% sample, the edge list is returned in an array with three rows,
@@ -54,9 +54,9 @@ function ijw = kronecker_generator (SCALE, edgefactor)
   ijw(1:2,:) = ijw(1:2,:) - 1;
 
 endfunction
-
+`
 由于只计算三角形时不需要第三个参数，原文件可以改成更简单的m程序
-
+`
 function ijw = kronecker_generator (SCALE, edgefactor)
 
   %% Set number of vertices.
@@ -92,3 +92,4 @@ function ijw = kronecker_generator (SCALE, edgefactor)
 
   %% Adjust to zero-based labels.
   ijw = ijw - 1;
+`
