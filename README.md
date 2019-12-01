@@ -1,6 +1,12 @@
 # kron_generate
 对Graph500的kron图生成器部分进行了复写，可以生成任意点数的32位二进制文件
 
+编译使用 g++ -fopenmp -o kron_gen  filename.cpp -O3 -std=c++11
+
+使用命令 ./kron_gen [点参数] [边参数] [文件名]
+如 ./kron_gen 500 12 mykrongen.bin
+上面将生成一个具有 500*(1024*1024) 顶点 12*(500*1024*1024) 个边的kron图数据
+
 本程序是根据graph500的octave程序简化后改编而来，源程序是：
 `
 function ijw = kronecker_generator (SCALE, edgefactor)
