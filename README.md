@@ -1,14 +1,21 @@
 # kron_generate
-对Graph500的kron图生成器部分进行了复写，可以生成任意点数的32位二进制文件
 
-编译使用 g++ -fopenmp -o kron_gen  filename.cpp -O3 -std=c++11
+## 背景
+对[Graph500](https://graph500.org)的kron图生成器部分进行了复写，可以生成任意点数的32位二进制文件
 
-使用命令 ./kron_gen [点参数] [边参数] [文件名] \n
-如 ./kron_gen 500 12 mykrongen.bin \n
-上面将生成一个具有 500*(1024*1024) 顶点 12*(500*1024*1024) 个边的kron图数据 \n
+## 编译与使用
+编译使用 `g++ -fopenmp -o kron_gen  filename.cpp -O3 -std=c++11`
 
+使用命令 `./kron_gen [点参数] [边参数] [文件名]`
+
+如 `./kron_gen 500 12 mykrongen.bin` 将生成一个具有 500\*(1024\*1024) 顶点 12\*(500\*1024\*1024) 个边的kron图数据文件 mykrongen.bin
+
+根据相同的算法还写了一个python程序，见 kron_generator.py
+
+## 算法来源
 本程序是根据graph500的octave程序简化后改编而来，源程序是：
-`
+- - -
+```
 function ijw = kronecker_generator (SCALE, edgefactor)
 %% Generate an edgelist according to the Graph500 parameters.  In this
 %% sample, the edge list is returned in an array with three rows,
@@ -60,9 +67,11 @@ function ijw = kronecker_generator (SCALE, edgefactor)
   ijw(1:2,:) = ijw(1:2,:) - 1;
 
 endfunction
-`
+```
+- - -
 由于只计算三角形时不需要第三个参数，原文件可以改成更简单的m程序
-`
+- - -
+```
 function ijw = kronecker_generator (SCALE, edgefactor)
 
   %% Set number of vertices.
@@ -98,4 +107,5 @@ function ijw = kronecker_generator (SCALE, edgefactor)
 
   %% Adjust to zero-based labels.
   ijw = ijw - 1;
-`
+```
+- - -
